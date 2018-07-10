@@ -12,6 +12,7 @@ import UnfollowUser from './components/UserFeed/UnfollowUser';
 import PersonalFeed from './components/UserFeed/PersonalFeed';
 import OtherUserFeed from './components/UserFeed/OtherUserFeed';
 import DeleteChirp from './components/common/DeleteChirp';
+import WelcomePage from './components/WelcomePage/WelcomePage';
 
 class App extends Component {
     render() {
@@ -20,7 +21,9 @@ class App extends Component {
                 <Header />
 
                 <Switch>
-                    <Route exact path="/" component={LoginPage} />
+                    <Route exact path="/" component={WelcomePage} />
+                    <Route path="/index.html" component={WelcomePage} />
+                    
                     <Route path="/login" component={LoginPage} />
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/logout" component={Logout} />
