@@ -11,6 +11,7 @@ import FollowUser from './components/UserFeed/FollowUser';
 import UnfollowUser from './components/UserFeed/UnfollowUser';
 import PersonalFeed from './components/UserFeed/PersonalFeed';
 import OtherUserFeed from './components/UserFeed/OtherUserFeed';
+import DeleteChirp from './components/common/DeleteChirp';
 
 class App extends Component {
     render() {
@@ -32,6 +33,8 @@ class App extends Component {
 
                     <Route path="/follow/:username" component={FollowUser} />
                     <Route path="/unfollow/:username" component={UnfollowUser} />
+
+                    <Route path="/deleteChirp/:id" component={DeleteChirp} />
                 </Switch>
 
                 <Footer />

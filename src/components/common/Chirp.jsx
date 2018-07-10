@@ -7,7 +7,10 @@ let Chirp = (props) => {
         <article className="chirp">
             <div className="titlebar">
                 <Link to={`/feed/${props.props._id}`} className="chirp-author">{props.props.author}</Link>
-                <span className="chirp-time">{dateConvertor(props.props._kmd.lmt)}</span>
+                <span className="chirp-time">
+                    {props.props.isAuthor ? <Link to={`/deleteChirp/:${props.props._id}`}>delete</Link> : null}
+                    {dateConvertor(props.props._kmd.lmt)}
+                </span>
             </div>
             <p>{props.props.text}</p>
         </article>
