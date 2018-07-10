@@ -45,6 +45,10 @@ footer>* {
   background: #7f7f7f;
 }
 
+.nav-active {
+  color: rgb(76, 151, 170) !important;
+}
+
 .loading {
   padding: 10px;
 }
