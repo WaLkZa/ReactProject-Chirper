@@ -27,7 +27,7 @@ class OtherUserFeed extends Component {
 
         this.setState({
             username: username,
-            isFollowed: JSON.parse(sessionStorage.getItem('subscriptions')).includes(username)
+            isFollowed: JSON.parse(localStorage.getItem('subscriptions')).includes(username)
         })
 
         Promise.all(
@@ -44,7 +44,7 @@ class OtherUserFeed extends Component {
 
                 chirpsArr.forEach(c => {
                     c.time = dateConvertor(c._kmd.ect);
-                    c.isAuthor = c.author === sessionStorage.getItem('username');
+                    c.isAuthor = c.author === localStorage.getItem('username');
                 });
 
                 this.setState({

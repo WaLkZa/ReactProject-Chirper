@@ -10,10 +10,10 @@ class FollowUser extends Component {
 
     componentDidMount() {
         let username = this.props.match.params.username.substr(1);
-        let userId = sessionStorage.getItem('userId');
+        let userId = localStorage.getItem('userId');
         
         // Create a copy of arr
-        let newSubArr = JSON.parse(sessionStorage.getItem('subscriptions')).splice(0);
+        let newSubArr = JSON.parse(localStorage.getItem('subscriptions')).splice(0);
         newSubArr.push(username);
 
         // this.setState({ username: username })
@@ -21,7 +21,7 @@ class FollowUser extends Component {
         usersService.modifyUser(userId, newSubArr)
             .then(() => {
                 //notify.showInfo(`Subscribed to ${username}`);
-                sessionStorage.setItem('subscriptions', JSON.stringify(newSubArr));
+                localStorage.setItem('subscriptions', JSON.stringify(newSubArr));
                 this.props.history.push(`/feed/:${username}`)
             })//.catch(notify.handleError);
     }

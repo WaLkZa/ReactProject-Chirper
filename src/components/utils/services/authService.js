@@ -3,11 +3,11 @@ import requester from "../requester";
 const ADMIN_ROLE_ID = '5275abc5-fdbb-455e-ac27-a4b3e53a8ce1'
 
 function isAuth() {
-    return sessionStorage.getItem('authtoken') !== null;
+    return localStorage.getItem('authtoken') !== null;
 }
 
 function isAdmin() {
-    return sessionStorage.getItem('roleId') !== null;
+    return localStorage.getItem('roleId') !== null;
 }
 
 // user/login
@@ -34,25 +34,25 @@ function register(username, password) {
 // user/logout
 function logout() {
     let logoutData = {
-        authtoken: sessionStorage.getItem('authtoken')
+        authtoken: localStorage.getItem('authtoken')
     };
 
     return requester.post('user', '_logout', 'kinvey', logoutData);
 }
 
-// saveSession in sessionStorage
+// saveSession in localStorage
 function saveSession(userInfo) {
     let userAuth = userInfo._kmd.authtoken;
-    sessionStorage.setItem('authtoken', userAuth);
+    localStorage.setItem('authtoken', userAuth);
     let username = userInfo.username;
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('userId', userInfo._id);
-    sessionStorage.setItem('subscriptions', JSON.stringify(userInfo.subscriptions));
+    localStorage.setItem('username', username);
+    localStorage.setItem('userId', userInfo._id);
+    localStorage.setItem('subscriptions', JSON.stringify(userInfo.subscriptions));
 
     if (userInfo._kmd.roles) {
         for (let userRole of userInfo._kmd.roles) {
             if (userRole.roleId === ADMIN_ROLE_ID) {
-                sessionStorage.setItem('roleId', ADMIN_ROLE_ID)
+                localStorage.setItem('roleId', ADMIN_ROLE_ID)
             }
         }
     }

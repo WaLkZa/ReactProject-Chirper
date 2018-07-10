@@ -9,7 +9,7 @@ const kinveyAppSecret = "8546d0afc25c48a19153f0ae2c6374f7";
 function makeAuth(type) {
     return type === 'basic' ?
         'Basic ' + btoa(kinveyAppKey + ':' + kinveyAppSecret) :
-        'Kinvey ' + sessionStorage.getItem('authtoken');
+        'Kinvey ' + localStorage.getItem('authtoken');
 }
 
 // Creates request object to kinvey

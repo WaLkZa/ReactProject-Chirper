@@ -21,15 +21,15 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        let subsArr = JSON.parse(sessionStorage.getItem('subscriptions')).map(e => `"${e}"`);
-        let username = sessionStorage.getItem('username');
+        let subsArr = JSON.parse(localStorage.getItem('subscriptions')).map(e => `"${e}"`);
+        let username = localStorage.getItem('username');
 
         this.setState({username: username})
 
         Promise.all([chirpsService.loadAllChirpsByUsername(username), usersService.loadUserFollowers(username)])
             .then(([chirpsArr, followersArr]) => {
                 let chirpsCount = chirpsArr.length;
-                let following = JSON.parse(sessionStorage.getItem('subscriptions')).length;
+                let following = JSON.parse(localStorage.getItem('subscriptions')).length;
                 let followers = followersArr.length;
 
                 chirpsService.loadFollowersChirps(subsArr)

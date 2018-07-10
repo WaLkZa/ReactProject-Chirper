@@ -38,7 +38,8 @@ footer>* {
 }
 
 .menu a:last-of-type {
-  float:right
+  padding: 1px;
+  float:right;
 }
 
 .menu>a:hover {

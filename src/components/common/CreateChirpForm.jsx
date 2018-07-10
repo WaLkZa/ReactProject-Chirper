@@ -21,7 +21,7 @@ class CreateChirpForm extends Component {
         ev.preventDefault()
 
         let text = this.state.text
-        let author = sessionStorage.getItem('username');
+        let author = localStorage.getItem('username');
 
         //TODO
 

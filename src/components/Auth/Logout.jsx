@@ -6,7 +6,7 @@ let Logout = () => {
     authService.logout()
         .then(() => {
             //TODO message
-            sessionStorage.clear()
+            localStorage.clear()
         })
 
     return (

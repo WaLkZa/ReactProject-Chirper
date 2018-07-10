@@ -23,7 +23,7 @@ class PersonalFeed extends Component {
     }
 
     componentDidMount() {
-        let username = sessionStorage.getItem('username');
+        let username = localStorage.getItem('username');
 
         this.setState({ username: username })
 
@@ -41,7 +41,7 @@ class PersonalFeed extends Component {
 
                 chirpsArr.forEach(c => {
                     c.time = dateConvertor(c._kmd.ect);
-                    c.isAuthor = c.author === sessionStorage.getItem('username');
+                    c.isAuthor = c.author === localStorage.getItem('username');
                 });
 
                 this.setState({
