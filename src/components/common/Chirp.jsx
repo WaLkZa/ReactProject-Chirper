@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
 import dateConvertor from './../utils/dateConvertor'
 
 let Chirp = (props) => {

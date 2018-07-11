@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import usersService from './../utils/services/usersService'
-import UserBox from './UserBox';
-import NavMenu from "../common/NavMenu";
+import UserBox from './UserBox'
+import NavMenu from "../common/NavMenu"
+import { toast } from 'react-toastify'
 
 class DiscoverPage extends Component {
     constructor(props) {
@@ -16,15 +17,19 @@ class DiscoverPage extends Component {
         usersService.loadAllUsers()
             .then((users) => {
                 users.forEach(user => {
-                    user.followers = users.filter(u => u.subscriptions.includes(user.username)).length;
-                });
-                users = users.filter(u => u.username !== localStorage.getItem('username'));
+                    user.followers = users.filter(u => u.subscriptions.includes(user.username)).length
+                })
+                users = users.filter(u => u.username !== localStorage.getItem('username'))
 
-                users = users.sort((a, b) => b.followers - a.followers); // sort by descending followers
+                users = users.sort((a, b) => b.followers - a.followers) // sort by descending followers
 
                 this.setState({users: users})
 
-            }).catch()
+            }).catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
     }
 
     render() {

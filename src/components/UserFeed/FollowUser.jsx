@@ -1,29 +1,30 @@
 import { Component } from 'react'
-import usersService from '../utils/services/usersService';
+import usersService from '../utils/services/usersService'
+import { toast } from 'react-toastify'
 
 class FollowUser extends Component {
-    // constructor(props) {
-    //     super(props)
-
-    //     this.state = { username: '' }
-    // }
-
     componentDidMount() {
-        let username = this.props.match.params.username.substr(1);
-        let userId = localStorage.getItem('userId');
+        let username = this.props.match.params.username.substr(1)
+        let userId = localStorage.getItem('userId')
         
         // Create a copy of arr
-        let newSubArr = JSON.parse(localStorage.getItem('subscriptions')).splice(0);
-        newSubArr.push(username);
-
-        // this.setState({ username: username })
+        let newSubArr = JSON.parse(localStorage.getItem('subscriptions')).splice(0)
+        newSubArr.push(username)
 
         usersService.modifyUser(userId, newSubArr)
             .then(() => {
-                //notify.showInfo(`Subscribed to ${username}`);
-                localStorage.setItem('subscriptions', JSON.stringify(newSubArr));
+                toast.info(`Subscribed to ${username}`, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+                
+                localStorage.setItem('subscriptions', JSON.stringify(newSubArr))
+                
                 this.props.history.push(`/feed/:${username}`)
-            })//.catch(notify.handleError);
+            }).catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
     }
 
     render() {

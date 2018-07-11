@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Chirp from './Chirp';
+import Chirp from './Chirp'
 
 class ChirpsList extends Component {
     render() {

@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import authService from '../utils/services/authService';
+import React, { Component } from 'react'
+import authService from '../utils/services/authService'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -27,9 +28,17 @@ class LoginForm extends Component {
 
         authService.register(this.state.username, this.state.password)
             .then((userInfo) => {
-                authService.saveSession(userInfo);
+                authService.saveSession(userInfo)
 
-                this.props.history.push('/feed');
+                toast.success("Registration successful. You are now logged in!", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+
+                this.props.history.push('/feed')
+            }).catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
             })
     }
 

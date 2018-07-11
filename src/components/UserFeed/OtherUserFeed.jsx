@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import chirpsService from '../utils/services/chirpsService';
-import usersService from '../utils/services/usersService';
-import dateConvertor from '../utils/dateConvertor';
-import UserStats from '../common/UserStats';
-import ChirpsList from '../common/ChirpsList';
-import NavMenu from '../common/NavMenu';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import chirpsService from '../utils/services/chirpsService'
+import usersService from '../utils/services/usersService'
+import dateConvertor from '../utils/dateConvertor'
+import UserStats from '../common/UserStats'
+import ChirpsList from '../common/ChirpsList'
+import NavMenu from '../common/NavMenu'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 class OtherUserFeed extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class OtherUserFeed extends Component {
     }
 
     componentDidMount() {
-        let username = this.props.match.params.username.substr(1);
+        let username = this.props.match.params.username.substr(1)
 
         this.setState({
             username: username,
@@ -38,14 +39,14 @@ class OtherUserFeed extends Component {
             ]
         )
             .then(([chirpsArr, followersArr, user]) => {
-                let chirpsCount = chirpsArr.length;
-                let following = user[0].subscriptions.length;
-                let followers = followersArr.length;
+                let chirpsCount = chirpsArr.length
+                let following = user[0].subscriptions.length
+                let followers = followersArr.length
 
                 chirpsArr.forEach(c => {
-                    c.time = dateConvertor(c._kmd.ect);
-                    c.isAuthor = c.author === localStorage.getItem('username');
-                });
+                    c.time = dateConvertor(c._kmd.ect)
+                    c.isAuthor = c.author === localStorage.getItem('username')
+                })
 
                 this.setState({
                     chirpsCount: chirpsCount,
@@ -53,7 +54,11 @@ class OtherUserFeed extends Component {
                     followers: followers,
                     chirps: chirpsArr
                 })
-            }).catch()
+            }).catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
     }
 
     render() {
@@ -81,4 +86,4 @@ class OtherUserFeed extends Component {
     }
 }
 
-export default OtherUserFeed;
+export default OtherUserFeed

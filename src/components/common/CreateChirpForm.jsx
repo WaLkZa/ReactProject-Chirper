@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import chirpsService from '../utils/services/chirpsService';
+import React, { Component } from 'react'
+import chirpsService from '../utils/services/chirpsService'
+import { toast } from 'react-toastify'
 
 class CreateChirpForm extends Component {
     constructor(props) {
@@ -8,49 +9,57 @@ class CreateChirpForm extends Component {
         this.state = {
             text: '',
         }
+
+        this.onChangeHandler = this.onChangeHandler.bind(this)
+        this.onSubmitHandler = this.onSubmitHandler.bind(this)
     }
 
-    handleChange = (ev) => {
+    onChangeHandler(ev) {
         let fieldName = ev.target.name
         let fieldValue = ev.target.value
 
         this.setState({ [fieldName]: fieldValue })
     }
 
-    handleSubmit = (ev) => {
+    onSubmitHandler(ev) {
         ev.preventDefault()
 
         let text = this.state.text
-        let author = localStorage.getItem('username');
-
-        //TODO
+        let author = localStorage.getItem('username')
 
         if (text.length === 0) {
-
-            //alert('Chirp text cannot be empty!');
-            return;
+            toast.warn("Chirp text cannot be empty!", {
+                position: toast.POSITION.TOP_RIGHT
+            })
+            
+            return
         }
 
-        // if (text.length > 150) {
-
-        //     alert('Chirp text cannot be longer than 150 characters!');
-        //     return;
-        // }
+        if (text.length > 150) {
+            toast.warn("Chirp text cannot be longer than 150 characters!", {
+                position: toast.POSITION.TOP_RIGHT
+            })
+            
+            return
+        }
 
         chirpsService.createChirp(text, author)
             .then(() => {
+                toast.info("Chirp published.", {
+                    position: toast.POSITION.TOP_RIGHT
+                })
 
-                //TODO
-                console.log('Chirp published.');
-                //console.log(this.props.history)
-
-            }).catch(/*notify.handleError*/);
+            }).catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
     }
 
     render() {
         return (
-            <form id="formSubmitChirp" className="chirp-form" onClick={this.handleSubmit}>
-                <textarea name="text" className="chirp-input" onChange={this.handleChange}></textarea>
+            <form id="formSubmitChirp" className="chirp-form" onSubmit={this.onSubmitHandler}>
+                <textarea name="text" className="chirp-input" onChange={this.onChangeHandler}></textarea>
                 <input className="chirp-submit" id="btnSubmitChirp" value="Chirp" type="submit" />
             </form>
         )

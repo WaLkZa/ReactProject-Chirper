@@ -1,5 +1,6 @@
 import { Component } from 'react'
-import chirpsService from '../utils/services/chirpsService';
+import chirpsService from '../utils/services/chirpsService'
+import { toast } from 'react-toastify'
 
 class DeleteChirp extends Component {
     componentDidMount() {
@@ -7,9 +8,16 @@ class DeleteChirp extends Component {
 
         chirpsService.deleteChirp(chirpId)
             .then(() => {
-                //notify.showInfo('Chirp deleted.');
+                toast.info("Chirp deleted.", {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+                
                 this.props.history.push(`/profile`)
-            })//.catch(notify.handleError);
+            }).catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
     }
 
     render() {

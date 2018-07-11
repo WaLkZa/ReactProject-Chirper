@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { NavLink } from 'react-router-dom'
-import authService from "../utils/services/authService";
+import authService from "../utils/services/authService"
 
 class NavMenu extends Component {
     render() {

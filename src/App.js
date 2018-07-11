@@ -13,11 +13,13 @@ import PersonalFeed from './components/UserFeed/PersonalFeed';
 import OtherUserFeed from './components/UserFeed/OtherUserFeed';
 import DeleteChirp from './components/common/DeleteChirp';
 import WelcomePage from './components/WelcomePage/WelcomePage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
     render() {
         return (
-            <div id="main">
+            <div id="main">                
                 <Header />
 
                 <Switch>
@@ -39,6 +41,8 @@ class App extends Component {
 
                     <Route path="/deleteChirp/:id" component={DeleteChirp} />
                 </Switch>
+
+                <ToastContainer autoClose={2500}/>
 
                 <Footer />
             </div>
