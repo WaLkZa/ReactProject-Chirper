@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import authService from '../utils/services/authService'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import chirpsService from '../utils/services/chirpsService';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -44,14 +45,16 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <form id="formLogin" className="form" onSubmit={this.onSubmitHandler}>
-                <label>Username</label>
-                <input name="username" onChange={this.onChangeHandler} type="text" />
-                <label>Password</label>
-                <input name="password" onChange={this.onChangeHandler} type="password" />
-                <input id="btnLogin" value="Sign In" type="submit" />
-                <Link to="/register">Register</Link>
-            </form>
+            <div>
+                <form id="formLogin" className="form" onSubmit={this.onSubmitHandler}>
+                    <label>Username</label>
+                    <input name="username" onChange={this.onChangeHandler} type="text" />
+                    <label>Password</label>
+                    <input name="password" onChange={this.onChangeHandler} type="password" />
+                    <input id="btnLogin" value="Sign In" type="submit" />
+                    <Link to="/register">Register</Link>
+                </form>
+            </div>
         )
     }
 }

@@ -175,8 +175,15 @@ footer>* {
   background: #f79c97;
 }
 
+/* div > .form {
+  display: block;
+  float: right;
+} */
+
 .form {
   text-align: center;
+  border: 2px solid #6592bf;
+  border-radius: 10px;
 }
 
 .form>* {

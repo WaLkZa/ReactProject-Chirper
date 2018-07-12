@@ -24,9 +24,14 @@ function modifyUser(userId, newSubs) {
     return requester.update('user', userId, 'kinvey', newUser)
 }
 
+function deleteUser(userId) {
+    return requester.remove('user', userId, 'master')
+}
+
 export default {
     loadUserByUsername,
     loadUserFollowers,
     loadAllUsers,
-    modifyUser
+    modifyUser,
+    deleteUser
 }

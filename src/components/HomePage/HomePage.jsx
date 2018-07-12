@@ -17,40 +17,39 @@ class HomePage extends Component {
             chirpsCount: 0,
             following: 0,
             followers: 0,
-            chirps: []
+            chirps: [],
+            title: 'Latest 10 Chirps'
         }
     }
 
     componentDidMount() {
-        let subsArr = JSON.parse(localStorage.getItem('subscriptions')).map(e => `"${e}"`)
         let username = localStorage.getItem('username')
 
         this.setState({username: username})
 
-        Promise.all([chirpsService.loadAllChirpsByUsername(username), usersService.loadUserFollowers(username)])
-            .then(([chirpsArr, followersArr]) => {
-                let chirpsCount = chirpsArr.length
+        Promise.all(
+            [
+                chirpsService.loadAllChirpsByUsername(username),
+                chirpsService.loadLatestXChirps(10),
+                usersService.loadUserFollowers(username)
+            ]
+        )
+            .then(([chirpsByUser ,allChirps, followersArr]) => {
+                let chirpsCount = chirpsByUser.length
                 let following = JSON.parse(localStorage.getItem('subscriptions')).length
                 let followers = followersArr.length
 
-                chirpsService.loadFollowersChirps(subsArr)
-                    .then((followersChirps) => {
-                        followersChirps.forEach(c => {
-                            c.time = dateConvertor(c._kmd.ect)
-                        })
+                allChirps.forEach(c => {
+                    c.time = dateConvertor(c._kmd.ect)
+                    c.isAuthor = c.author === localStorage.getItem('username')
+                })
 
-                        this.setState({
-                            chirpsCount: chirpsCount,
-                            following: following,
-                            followers: followers,
-                            chirps: followersChirps
-                        })
-
-                    }).catch((reason) => {
-                        toast.error(reason.responseJSON.description, {
-                            position: toast.POSITION.TOP_RIGHT
-                        })
-                    })
+                this.setState({
+                    chirpsCount: chirpsCount,
+                    following: following,
+                    followers: followers,
+                    chirps: allChirps
+                })
             }).catch((reason) => {
                 toast.error(reason.responseJSON.description, {
                     position: toast.POSITION.TOP_RIGHT

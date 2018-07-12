@@ -19,7 +19,8 @@ class PersonalFeed extends Component {
             followers: 0,
             chirps: 0,
             isCurrentlyLogged: false,
-            isFollowed: false
+            isFollowed: false,
+            title: 'My Chirps'
         }
     }
 

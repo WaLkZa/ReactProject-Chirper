@@ -19,7 +19,8 @@ class OtherUserFeed extends Component {
             followers: 0,
             chirps: 0,
             isCurrentlyLogged: false,
-            isFollowed: false
+            isFollowed: false,
+            title: ''
         }
     }
 
@@ -28,7 +29,8 @@ class OtherUserFeed extends Component {
 
         this.setState({
             username: username,
-            isFollowed: JSON.parse(localStorage.getItem('subscriptions')).includes(username)
+            isFollowed: JSON.parse(localStorage.getItem('subscriptions')).includes(username),
+            title: `${username}'s Chirps`
         })
 
         Promise.all(
