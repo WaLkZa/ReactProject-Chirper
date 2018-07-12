@@ -9,7 +9,8 @@ class DiscoverPage extends Component {
         super(props)
 
         this.state = {
-            users: []
+            users: [],
+            count: 0
         }
     }
 
@@ -23,7 +24,10 @@ class DiscoverPage extends Component {
 
                 users = users.sort((a, b) => b.followers - a.followers) // sort by descending followers
 
-                this.setState({users: users})
+                this.setState({
+                    users: users,
+                    count: users.length
+                })
 
             }).catch((reason) => {
                 toast.error(reason.responseJSON.description, {
@@ -38,7 +42,7 @@ class DiscoverPage extends Component {
                 <NavMenu />
                 <div className="content">
                     <div className="chirps">
-                        <h2 className="titlebar">Discover</h2>
+                        <h2 className="titlebar">Discover ({this.state.count} users in database)</h2>
                         <div id="userlist">
                             {this.state.users.map(user => {
                                 return <UserBox key={user._id} {...user} />
