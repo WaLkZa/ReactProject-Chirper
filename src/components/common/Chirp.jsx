@@ -7,7 +7,7 @@ let Chirp = (props) => {
     return (
         <article className="chirp">
             <div className="titlebar">
-                <Link to={`/feed/${props.props._id}`} className="chirp-author">{props.props.author}</Link>
+                <Link to={`/feed/:${props.props.author}`} className="chirp-author">{props.props.author}</Link>
                 <span className="chirp-time">
                     {props.props.isAuthor || authService.isAdmin() ? <Link to={`/deleteChirp/:${props.props._id}`}>delete</Link> : null}
                     {dateConvertor(props.props._kmd.lmt)}
