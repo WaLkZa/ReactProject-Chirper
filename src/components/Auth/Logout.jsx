@@ -7,15 +7,15 @@ let Logout = () => {
     authService.logout()
         .then(() => {
             localStorage.clear()
+
+            toast.success("Logout successful.", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
         }).catch((reason) => {
             toast.error(reason.responseJSON.description, {
                 position: toast.POSITION.TOP_RIGHT
             })
         })
-    
-    toast.success("Logout successful.", {
-        position: toast.POSITION.BOTTOM_RIGHT
-    })
 
     return (
         <Redirect to="/login" />

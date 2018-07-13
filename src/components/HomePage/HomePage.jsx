@@ -18,37 +18,59 @@ class HomePage extends Component {
             following: 0,
             followers: 0,
             chirps: [],
-            title: 'Latest 10 Chirps'
+            title: 'Chirps from all followed users by you'
         }
     }
 
     componentDidMount() {
         let username = localStorage.getItem('username')
 
-        this.setState({username: username})
+        this.setState({ username: username })
+        
+        let allFollowedChirps = []
+
+        let users = JSON.parse(localStorage.getItem('subscriptions'))
+        
+        for (let user of users) {
+            allFollowedChirps.push(chirpsService.loadAllChirpsByUsername(user))
+        }
+
+        Promise.all(allFollowedChirps)
+            .then(arr => {
+                if (arr.length > 0) {
+                    let allChirpsInOneArray = arr.reduce((result, current) => {
+                        return result.concat(current)
+                    })
+
+                    allChirpsInOneArray.forEach(c => {
+                        c.time = dateConvertor(c._kmd.ect)
+                    })
+
+                    this.setState({
+                        chirps: allChirpsInOneArray
+                    })
+                }
+            })
+            .catch((reason) => {
+                toast.error(reason.responseJSON.description, {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
 
         Promise.all(
             [
                 chirpsService.loadAllChirpsByUsername(username),
-                chirpsService.loadLatestXChirps(10),
                 usersService.loadUserFollowers(username)
             ]
-        )
-            .then(([chirpsByUser ,allChirps, followersArr]) => {
+        ).then(([chirpsByUser, followersArr]) => {
                 let chirpsCount = chirpsByUser.length
                 let following = JSON.parse(localStorage.getItem('subscriptions')).length
                 let followers = followersArr.length
-
-                allChirps.forEach(c => {
-                    c.time = dateConvertor(c._kmd.ect)
-                    c.isAuthor = c.author === localStorage.getItem('username')
-                })
 
                 this.setState({
                     chirpsCount: chirpsCount,
                     following: following,
                     followers: followers,
-                    chirps: allChirps
                 })
             }).catch((reason) => {
                 toast.error(reason.responseJSON.description, {
