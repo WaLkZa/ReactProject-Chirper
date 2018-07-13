@@ -9,8 +9,7 @@ class DiscoverPage extends Component {
         super(props)
 
         this.state = {
-            users: [],
-            count: 0
+            users: []
         }
     }
 

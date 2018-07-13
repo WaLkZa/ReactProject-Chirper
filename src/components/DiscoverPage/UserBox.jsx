@@ -8,8 +8,8 @@ let UserBox = (props) => {
             <div><Link to={`/feed/:${props.username}`} className="chirp-author">{props.username}</Link></div>
 
             <div className="user-details">
-                {authService.isAdmin() ? <Link to={`/deleteUser/:${props._id}`}>delete user</Link> : null}
-                <span>{props.followers} followers</span>
+                {authService.isAdmin() ? <Link to={`/deleteUser/:${props._id}`}>delete user   </Link> : null}
+                <span> {props.followers} followers</span>
             </div>
         </div>
     )

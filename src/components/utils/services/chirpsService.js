@@ -13,6 +13,12 @@ function loadAllChirpsByUsername(username) {
     return requester.get('appdata', endpoint, 'kinvey')
 }
 
+function loadChirpById(chirpId) {
+    let endpoint = `chirps?query={"_id":"${chirpId}"}`
+
+    return requester.get('appdata', endpoint, 'kinvey')
+}
+
 function loadLatestXChirps(number) {
     let endpoint = `chirps?query={}&sort={"_kmd.ect": -1}&limit=${number}`
 
@@ -32,11 +38,21 @@ function deleteChirp(chirpId) {
     return requester.remove('appdata', `chirps/${chirpId}`, authService.isAdmin() ? 'master' : 'kinvey')
 }
 
+function editChirp(chirpId, author, text) {
+    let newData = {
+        author: author,
+        text: text
+    }
+
+    return requester.update('appdata', `chirps/${chirpId}`, authService.isAdmin() ? 'master' : 'kinvey', newData)
+}
 
 export default {
     loadFollowersChirps,
     loadAllChirpsByUsername,
+    loadChirpById,
     loadLatestXChirps,
     createChirp,
-    deleteChirp
+    deleteChirp,
+    editChirp
 }

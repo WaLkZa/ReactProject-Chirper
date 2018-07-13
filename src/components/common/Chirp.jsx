@@ -9,7 +9,10 @@ let Chirp = (props) => {
             <div className="titlebar">
                 <Link to={`/feed/:${props.props.author}`} className="chirp-author">{props.props.author}</Link>
                 <span className="chirp-time">
-                    {props.props.isAuthor || authService.isAdmin() ? <Link to={`/deleteChirp/:${props.props._id}`}>delete</Link> : null}
+                    {props.props.isAuthor || authService.isAdmin() ? <Link to={`/editChirp/:${props.props._id}`}>edit   </Link> : null}
+
+                    {props.props.isAuthor || authService.isAdmin() ? <Link to={`/deleteChirp/:${props.props._id}`}>delete   </Link> : null}
+                    
                     {dateConvertor(props.props._kmd.lmt)}
                 </span>
             </div>

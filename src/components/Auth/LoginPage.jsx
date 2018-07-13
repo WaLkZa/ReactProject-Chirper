@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import authService from '../utils/services/authService'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import chirpsService from '../utils/services/chirpsService';
 
 class LoginForm extends Component {
     constructor(props) {

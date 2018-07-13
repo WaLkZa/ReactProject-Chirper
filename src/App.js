@@ -16,6 +16,7 @@ import WelcomePage from './components/WelcomePage/WelcomePage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteUser from './components/common/DeleteUser';
+import EditChirp from './components/common/EditChirp';
 
 class App extends Component {
     render() {
@@ -40,6 +41,7 @@ class App extends Component {
                     <Route path="/follow/:username" component={FollowUser} />
                     <Route path="/unfollow/:username" component={UnfollowUser} />
 
+                    <Route path="/editChirp/:id" component={EditChirp} />
                     <Route path="/deleteChirp/:id" component={DeleteChirp} />
                     <Route path="/deleteUser/:id" component={DeleteUser} />
                 </Switch>
