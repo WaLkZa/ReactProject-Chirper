@@ -1,1 +1,3 @@
 # ReactProject-Chirper
+
+Web application (SPA) using React, JSX, AJAX, REST and JSON with cloud-based backend (Kinvey). The app keeps users and chirps (tweets). Users can register, login, logout, view feed page (all chirps from followers sorted by time in descending), create a chirp, delete a chirp, view own chirps, discover new people, get all chirps by specific user (sorted by time in descending), follow or unfollow a user. Admins have access to edit and delete chirps to all users. Also they can delete users.
