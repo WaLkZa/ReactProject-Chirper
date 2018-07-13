@@ -25,6 +25,12 @@ function loadLatestXChirps(number) {
     return requester.get('appdata', endpoint, 'master')
 }
 
+function loadAllChirps() {
+    let endpoint = `chirps?query={}&sort={"_kmd.ect": -1}`
+
+    return requester.get('appdata', endpoint, 'master')
+}
+
 function createChirp(text, author) {
     let chirpData = {
         text,
@@ -52,6 +58,7 @@ export default {
     loadAllChirpsByUsername,
     loadChirpById,
     loadLatestXChirps,
+    loadAllChirps,
     createChirp,
     deleteChirp,
     editChirp
