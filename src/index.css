@@ -175,15 +175,11 @@ footer>* {
   background: #f79c97;
 }
 
-/* div > .form {
-  display: block;
-  float: right;
-} */
-
 .form {
+  margin: 20px auto;
+  padding: 20px;
   text-align: center;
-  border: 2px solid #6592bf;
-  border-radius: 10px;
+  max-width: 200px;
 }
 
 .form>* {

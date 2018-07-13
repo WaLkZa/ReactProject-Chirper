@@ -45,7 +45,7 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                <form id="formLogin" className="form" onSubmit={this.onSubmitHandler}>
+                <form id="formLogin" className="form chirps" onSubmit={this.onSubmitHandler}>
                     <label>Username</label>
                     <input name="username" onChange={this.onChangeHandler} type="text" />
                     <label>Password</label>
