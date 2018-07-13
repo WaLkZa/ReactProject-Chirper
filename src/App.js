@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DeleteUser from './components/common/DeleteUser';
 import EditChirp from './components/common/EditChirp';
 import MainAdminPage from './components/Admin/MainAdminPage';
+import NotFound from './components/common/NotFound';
 
 class App extends Component {
     render() {
@@ -47,6 +48,8 @@ class App extends Component {
                     <Route path="/deleteUser/:id" component={DeleteUser} />
 
                     <Route exact path="/admin" component={MainAdminPage} />
+
+                    <Route component={NotFound} />
                 </Switch>
 
                 <ToastContainer autoClose={2500}/>
