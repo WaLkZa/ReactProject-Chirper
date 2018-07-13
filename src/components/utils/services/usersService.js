@@ -25,7 +25,7 @@ function modifyUser(userId, newSubs) {
 }
 
 function deleteUser(userId) {
-    return requester.remove('user', userId, 'master')
+    return requester.remove('user', `${userId}?hard=true`, 'master')
 }
 
 export default {
