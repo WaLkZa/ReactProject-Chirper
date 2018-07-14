@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { HashRouter, Route, Switch, withRouter } from 'react-router-dom';
 import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
 import Header from "./components/common/Header"
@@ -26,31 +26,33 @@ class App extends Component {
             <div id="main">                
                 <Header />
 
-                <Switch>
-                    <Route exact path="/" component={WelcomePage} />
-                    <Route path="/index.html" component={WelcomePage} />
-                    
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/register" component={RegisterPage} />
-                    <Route path="/logout" component={Logout} />
+                <HashRouter>
+                    <Switch>
+                        <Route exact path="/" component={WelcomePage} />
+                        <Route path="/index.html" component={WelcomePage} />
+                        
+                        <Route path="/login" component={LoginPage} />
+                        <Route path="/register" component={RegisterPage} />
+                        <Route path="/logout" component={Logout} />
 
-                    <Route exact path="/feed" component={HomePage} />
-                    <Route path="/discover" component={DiscoverPage} />
+                        <Route exact path="/feed" component={HomePage} />
+                        <Route path="/discover" component={DiscoverPage} />
 
-                    <Route exact path="/profile" component={PersonalFeed} />
-                    <Route path="/feed/:username" component={OtherUserFeed} />
+                        <Route exact path="/profile" component={PersonalFeed} />
+                        <Route path="/feed/:username" component={OtherUserFeed} />
 
-                    <Route path="/follow/:username" component={FollowUser} />
-                    <Route path="/unfollow/:username" component={UnfollowUser} />
+                        <Route path="/follow/:username" component={FollowUser} />
+                        <Route path="/unfollow/:username" component={UnfollowUser} />
 
-                    <Route path="/editChirp/:id" component={EditChirp} />
-                    <Route path="/deleteChirp/:id" component={DeleteChirp} />
-                    <Route path="/deleteUser/:id" component={DeleteUser} />
+                        <Route path="/editChirp/:id" component={EditChirp} />
+                        <Route path="/deleteChirp/:id" component={DeleteChirp} />
+                        <Route path="/deleteUser/:id" component={DeleteUser} />
 
-                    <Route exact path="/admin" component={MainAdminPage} />
+                        <Route exact path="/admin" component={MainAdminPage} />
 
-                    <Route component={NotFound} />
-                </Switch>
+                        <Route component={NotFound} />
+                    </Switch>
+                </HashRouter>
 
                 <ToastContainer autoClose={2500}/>
 
