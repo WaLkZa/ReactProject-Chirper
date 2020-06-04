@@ -25,7 +25,7 @@ class CreateChirpForm extends Component {
         ev.preventDefault()
 
         let text = this.state.text
-        let author = localStorage.getItem('username')
+        let author = localStorage.getItem('userId')
 
         if (text.length === 0) {
             toast.warn("Chirp text cannot be empty!", {
@@ -43,12 +43,12 @@ class CreateChirpForm extends Component {
             return
         }
 
-        chirpsService.createChirp(text, author)
+        chirpsService.createChirp(author, text)
             .then(() => {
                 toast.info("Chirp published.", {
                     position: toast.POSITION.TOP_RIGHT
                 })
-
+                
             }).catch((reason) => {
                 toast.error(reason.responseJSON.description, {
                     position: toast.POSITION.TOP_RIGHT

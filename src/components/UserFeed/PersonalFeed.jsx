@@ -26,34 +26,36 @@ class PersonalFeed extends Component {
 
     componentDidMount() {
         let username = localStorage.getItem('username')
+        let userId = localStorage.getItem('userId')
 
         this.setState({ username: username })
 
         Promise.all(
             [
-                chirpsService.loadAllChirpsByUsername(username),
-                usersService.loadUserFollowers(username),
-                usersService.loadUserByUsername(username)
+                chirpsService.loadAllChirpsByUserID(userId),
+                usersService.loadUserStats(userId)
             ]
         )
-            .then(([chirpsArr, followersArr, user]) => {
-                let chirpsCount = chirpsArr.length
-                let following = user[0].subscriptions.length
-                let followers = followersArr.length
+            .then(([resultChirps, resultStats]) => {
+                let chirps = resultChirps.chirps;
 
-                chirpsArr.forEach(c => {
-                    c.time = dateConvertor(c._kmd.ect)
-                    c.isAuthor = c.author === localStorage.getItem('username')
+                let chirpsCount = chirps.length
+                let following = resultStats.stats[0].followingCount;
+                let followers = resultStats.stats[0].followersCount;
+
+                chirps.forEach(c => {
+                    c.time = dateConvertor(c.dateCreated)
+                    c.isAuthor = c.userId == userId
                 })
 
                 this.setState({
                     chirpsCount: chirpsCount,
                     following: following,
                     followers: followers,
-                    chirps: chirpsArr,
+                    chirps: chirps,
                 })
             }).catch((reason) => {
-                toast.error(reason.responseJSON.description, {
+                toast.error(reason.responseJSON.message, {
                     position: toast.POSITION.TOP_RIGHT
                 })
             })

@@ -25,8 +25,8 @@ class EditChirp extends Component {
             .then((data) => {
                 this.setState({
                     id: chirpId,
-                    author: data[0].author,
-                    text: data[0].text
+                    author: data.chirp.user.name,
+                    text: data.chirp.content
                 })
             }).catch((reason) => {
                 toast.error(reason.responseJSON.description, {
@@ -64,7 +64,7 @@ class EditChirp extends Component {
             return
         }
 
-        chirpsService.editChirp(this.state.id, author, text)
+        chirpsService.editChirp(this.state.id, text)
             .then(() => {
                 toast.info("Chirp edited", {
                     position: toast.POSITION.TOP_RIGHT

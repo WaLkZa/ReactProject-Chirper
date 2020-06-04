@@ -7,7 +7,7 @@ class ChirpsList extends Component {
             return (
                 <div id="chirps" className="chirps"><h2 className="titlebar">{this.props.title}</h2>
                     {this.props.chirps.map(chirp => {
-                        return <Chirp key={chirp._id} props={chirp} />
+                        return <Chirp key={chirp.id} props={chirp} />
                     })}
                 </div>
             )
