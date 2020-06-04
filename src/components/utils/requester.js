@@ -1,11 +1,11 @@
 import $ from 'jquery'
 
-const baseUrl = 'http://localhost:3001/api/';
+const baseUrl = 'http://localhost:3000/api/';
 
-function makeRequest(method, module, endpoint, auth) {
+function makeRequest(method, endpoint, auth) {
     let requestObj = {
         method,
-        url: baseUrl + module + '/' + endpoint,
+        url: baseUrl + endpoint,
         
         headers: {
             'Content-type': 'application/json'
@@ -20,27 +20,27 @@ function makeRequest(method, module, endpoint, auth) {
 }
 
 // Function to return GET promise
-function get(module, endpoint, auth) {
-    return $.ajax(makeRequest('GET', module, endpoint, auth));
+function get(endpoint, auth) {
+    return $.ajax(makeRequest('GET', endpoint, auth));
 }
 
 // Function to return POST promise
-function post(module, endpoint, auth, data) {
-    let req = makeRequest('POST', module, endpoint, auth);
+function post(endpoint, auth, data) {
+    let req = makeRequest('POST', endpoint, auth);
     req.data = JSON.stringify(data);
     return $.ajax(req);
 }
 
 // Function to return PUT promise
-function update(module, endpoint, auth, data) {
-    let req = makeRequest('PUT', module, endpoint, auth);
+function update(endpoint, auth, data) {
+    let req = makeRequest('PUT', endpoint, auth);
     req.data = JSON.stringify(data);
     return $.ajax(req);
 }
 
 // Function to return DELETE promise
-function remove(module, endpoint, auth) {
-    return $.ajax(makeRequest('DELETE', module, endpoint, auth));
+function remove(endpoint, auth) {
+    return $.ajax(makeRequest('DELETE', endpoint, auth));
 }
 
 export default {

@@ -15,7 +15,7 @@ function login(username, password) {
         password
     };
 
-    return requester.post('user', 'login', 'basic', userData);
+    return requester.post('user/login', 'basic', userData);
 }
 
 // user/register
@@ -25,7 +25,7 @@ function register(username, password) {
         password
     };
 
-    return requester.post('user', 'register', 'basic', userData);
+    return requester.post('user/register', 'basic', userData);
 }
 
 // user/logout
@@ -34,7 +34,7 @@ function logout() {
         authtoken: localStorage.getItem('authtoken')
     };
 
-    return requester.post('user', '_logout', 'kinvey', logoutData);
+    return requester.post('user/_logout', 'kinvey', logoutData);
 }
 
 // saveSession in localStorage

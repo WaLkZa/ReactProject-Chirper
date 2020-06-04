@@ -1,63 +1,46 @@
 import requester from "../requester"
-import authService from '../services/authService'
 
-function loadFollowersChirps(subs) {
-    let endpoint = `chirps?query={"author":{"$in": [${subs}]}}&sort={"_kmd.ect": -1}`
-
-    return requester.get('appdata', endpoint, 'kinvey')
+function loadAllFollowedChirps() {
+    return requester.get('chirp/all-followed', 'Bearer')
 }
 
-function loadAllChirpsByUsername(username) {
-    let endpoint = `chirps?query={"author":"${username}"}&sort={"_kmd.ect": -1}`
-
-    return requester.get('appdata', endpoint, 'kinvey')
+function loadAllChirpsByUserID(userId) {
+    return requester.get(`chirp/all/${userId}`, 'Bearer')
 }
 
 function loadChirpById(chirpId) {
-    let endpoint = `chirps?query={"_id":"${chirpId}"}`
-
-    return requester.get('appdata', endpoint, 'kinvey')
-}
-
-function loadLatestXChirps(number) {
-    let endpoint = `chirps?query={}&sort={"_kmd.ect": -1}&limit=${number}`
-
-    return requester.get('appdata', endpoint, 'master')
+    return requester.get(`chirp/${chirpId}`, 'Bearer')
 }
 
 function loadAllChirps() {
-    let endpoint = `chirps?query={}&sort={"_kmd.ect": -1}`
-
-    return requester.get('appdata', endpoint, 'master')
+    return requester.get('chirp/all', 'Basic');
 }
 
-function createChirp(text, author) {
+function createChirp(userId, content) {
     let chirpData = {
-        text,
-        author
+        userId,
+        content
     }
 
-    return requester.post('appdata', 'chirps', 'kinvey', chirpData)
+    return requester.post('chirp/create', 'Bearer', chirpData)
 }
 
 function deleteChirp(chirpId) {
-    return requester.remove('appdata', `chirps/${chirpId}`, authService.isAdmin() ? 'master' : 'kinvey')
+    return requester.remove(`chirp/delete/${chirpId}`, 'Bearer')
 }
 
-function editChirp(chirpId, author, text) {
+function editChirp(chirpId, content) {
     let newData = {
-        author: author,
-        text: text
+        content
     }
 
-    return requester.update('appdata', `chirps/${chirpId}`, authService.isAdmin() ? 'master' : 'kinvey', newData)
+    return requester.update(`chirp/edit/${chirpId}`, 'Bearer', newData)
 }
 
 export default {
-    loadFollowersChirps,
-    loadAllChirpsByUsername,
+    loadAllFollowedChirps,
+    loadAllChirpsByUserID,
     loadChirpById,
-    loadLatestXChirps,
     loadAllChirps,
     createChirp,
     deleteChirp,

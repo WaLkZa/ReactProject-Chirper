@@ -1,37 +1,50 @@
 import requester from "../requester"
 
-function loadUserByUsername(username) {
-    let endpoint = `?query={"username":"${username}"}`
-
-    return requester.get('user', endpoint, 'kinvey')
+function loadUserById(userId) {
+    return requester.get(`user/${userId}`, 'Basic')
 }
 
-function loadUserFollowers(username) {
-    let endpoint = `?query={"subscriptions":"${username}"}`
-
-    return requester.get('user', endpoint, 'kinvey')
+function loadUserStats(userId) {
+    return requester.get(`user/stats/${userId}`, 'Basic')
 }
+
+// function loadUserFollowers(username) {
+//     let endpoint = `?query={"subscriptions":"${username}"}`
+
+//     return requester.get('user', endpoint, 'Bearer')
+// }
 
 function loadAllUsers() {
-    return requester.get('user', '', 'kinvey')
+    return requester.get('user/all', 'Bearer')
 }
 
-function modifyUser(userId, newSubs) {
-    let newUser = {
-        subscriptions: newSubs
-    }
-
-    return requester.update('user', userId, 'kinvey', newUser)
+function followUser(userId) {
+    return requester.get(`user/follow/${userId}`, 'Bearer')
 }
 
-function deleteUser(userId) {
-    return requester.remove('user', `${userId}?hard=true`, 'master')
+function isUserFollowed(userId) {
+    return requester.get(`user/is-followed/${userId}`, 'Bearer')
 }
+
+// function modifyUser(userId, newSubs) {
+//     let newUser = {
+//         subscriptions: newSubs
+//     }
+
+//     return requester.update('user', userId, 'Bearer', newUser)
+// }
+
+// function deleteUser(userId) {
+//     return requester.remove('user', `${userId}?hard=true`, 'master')
+// }
 
 export default {
-    loadUserByUsername,
-    loadUserFollowers,
+    loadUserById,
+    loadUserStats,
+    //loadUserFollowers,
     loadAllUsers,
-    modifyUser,
-    deleteUser
+    followUser,
+    isUserFollowed
+    //modifyUser,
+    //deleteUser
 }
