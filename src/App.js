@@ -39,7 +39,7 @@ class App extends Component {
                         <Route path="/discover" component={DiscoverPage} />
 
                         <Route exact path="/profile" component={PersonalFeed} />
-                        <Route path="/feed/:username" component={OtherUserFeed} />
+                        <Route path="/feed/:id" component={OtherUserFeed} />
 
                         <Route path="/follow/:username" component={FollowUser} />
                         <Route path="/unfollow/:username" component={UnfollowUser} />
