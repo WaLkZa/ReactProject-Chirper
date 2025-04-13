@@ -69,30 +69,6 @@ const EditChirp = () => {
     };
 
     return (
-        // <div>
-        //     <NavMenu />
-        //     <div className="content">
-        //         <div className="chirper">
-        //             <h2 className="titlebar">Author: {chirpData.author}</h2>
-
-        //             <form id="formSubmitChirp" className="chirp-form" onSubmit={onSubmitHandler}>
-        //                 <textarea
-        //                     name="text"
-        //                     className="chirp-input"
-        //                     value={chirpData.text}
-        //                     onChange={onChangeHandler}
-        //                 />
-        //                 <input
-        //                     className="chirp-submit"
-        //                     id="btnSubmitChirp"
-        //                     value="Edit"
-        //                     type="submit"
-        //                 />
-        //             </form>
-        //         </div>
-        //     </div>
-        // </div>
-
         <div>
             <NavMenu />
             <div className="container">
