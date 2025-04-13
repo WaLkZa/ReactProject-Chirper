@@ -2,19 +2,15 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import authService from "../utils/services/authService";
 
-const UserBox = ({ name, id }) => {
+const UserBox = ({ name, id, chirps }) => {
     return (
-        <div className="userbox">
-            <div>
-                <Link to={`/feed/${id}`} className="chirp-author">{name}</Link>
-            </div>
+        <div className="d-flex justify-content-between align-items-center border-bottom py-2">
+            <Link to={`/feed/${id}`} className="chirp-author">{name}</Link>
 
-            <div className="user-details">
-                {authService.isAdmin() && (
-                    <Link to={`/deleteUser/${id}`}>delete user</Link>
-                )}
-                {/* <span> {followers} followers</span> */}
-            </div>
+            {authService.isAdmin() && (
+                <Link to={`/deleteUser/${id}`}><i class="bi bi-trash3-fill"></i></Link>
+            )}
+            <span className="text-muted small">{chirps.length} chirps</span>
         </div>
     );
 };

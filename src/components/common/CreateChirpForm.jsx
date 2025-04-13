@@ -33,7 +33,7 @@ const CreateChirpForm = ({ onChirpCreated }) => {
             toast.info("Chirp published.", {
                 position: 'top-right'
             });
-            setText(''); // Clear the form after successful submission
+            setText('');
             if (onChirpCreated) {
                 onChirpCreated();
             }
@@ -45,18 +45,12 @@ const CreateChirpForm = ({ onChirpCreated }) => {
     };
 
     return (
-        <form id="formSubmitChirp" className="chirp-form" onSubmit={onSubmitHandler}>
-            <textarea 
-                name="text" 
-                className="chirp-input"
-                value={text}
-                onChange={onChangeHandler}
-                placeholder="What's on your mind?"
-                maxLength={150}
-            />
-            {/* <textarea name="text" className="chirp-input" onChange={onChangeHandler}></textarea> */}
-            <input className="chirp-submit" id="btnSubmitChirp" value="Create" type="submit" />
-        </form>
+        <div className="card-body">
+            <form id="formSubmitChirpMy" onSubmit={onSubmitHandler}>
+                <textarea name="text" className="form-control mb-2 chirp-input" rows="3" value={text}  onChange={onChangeHandler} placeholder="What's on your mind?" maxLength={150}></textarea>
+                <input id="btnSubmitChirpMy" value="Create" type="submit" className="btn btn-primary float-end" />
+            </form>
+        </div>
     );
 };
 

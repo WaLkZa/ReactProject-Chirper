@@ -9,23 +9,25 @@ const Chirp = ({ props: { user, id, isAuthor, dateCreated, content } }) => {
     const canModify = isAuthor || authService.isAdmin();
 
     return (
-        <article className="chirp">
-            <div className="titlebar">
-                <Link to={`/feed/${user.id}`} className="chirp-author">{user.name}</Link>
-                <span className="chirp-time">
-                    {canModify && (
-                        <>
-                            <Link to={`/editChirp/${id}`}>edit</Link>
-                            {' '}
-                            <Link to={`/deleteChirp/${id}`}>delete</Link>
-                            {' '}
-                        </>
-                    )}
-                    {dateConvertor(dateCreated)}
-                </span>
-            </div>
-            <p>{content}</p>
-        </article>
+        <div className="card-body border-bottom">
+            <article className="mb-3">
+                <div className="d-flex justify-content-between">
+                    <Link to={`/feed/${user.id}`} className="chirp-author">{user.name}</Link>
+                    <span className="chirp-time">
+                        {canModify && (
+                            <>
+                                <Link to={`/editChirp/${id}`}><i class="bi bi-pencil-fill"></i></Link>
+                                {' '}
+                                <Link to={`/deleteChirp/${id}`}><i class="bi bi-trash3-fill"></i></Link>
+                                {' '}
+                            </>
+                        )}
+                        {dateConvertor(dateCreated)}
+                    </span>
+                </div>
+                <p className="mb-0">{content}</p>
+            </article>
+        </div>
     );
 };
 

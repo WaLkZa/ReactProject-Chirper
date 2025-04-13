@@ -24,7 +24,7 @@ const DeleteChirp = () => {
                     position: 'top-right'
                 });
             });
-    }, []); // Run once on mount
+    }, []);
 
     return null;
 };

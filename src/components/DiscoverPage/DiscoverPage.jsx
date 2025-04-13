@@ -13,6 +13,7 @@ const DiscoverPage = () => {
     useEffect(() => {
         usersService.loadAllUsers()
             .then((result) => {
+                console.log(result)
                 result.users = result.users.filter(u => u.name !== localStorage.getItem('username'))
 
                 setState({
@@ -30,13 +31,22 @@ const DiscoverPage = () => {
     return (
         <div>
             <NavMenu />
-            <div className="content">
-                <div className="chirps">
-                    <h2 className="titlebar">Discover ({state.count} users in database)</h2>
-                    <div id="userlist">
-                        {state.users.map(user => (
-                            <UserBox key={user.id} {...user} />
-                        ))}
+
+            <div className="container">
+                <div className="row justify-content-center m-2">
+                    <div className="col-md-6 col-lg-8">
+                        <div className="card">
+                            <div className="card-header">
+                                <h5 className="">Discover ({state.count} users in database)</h5>
+                            </div>
+                            <div className="card-body">
+                                <div id="userlist">
+                                    {state.users.map(user => (
+                                        <UserBox key={user.id} {...user} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

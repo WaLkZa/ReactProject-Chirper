@@ -28,7 +28,7 @@ const OtherUserFeed = () => {
         //         setState(prevState => ({
         //             ...prevState,
         //             isFollowed: false,
-                    
+
         //         }))
         //     })
 
@@ -71,32 +71,36 @@ const OtherUserFeed = () => {
     return (
         <div>
             <NavMenu />
-            <div className="content">
-                <div className="chirper">
-                    <h2 className="titlebar">{state.username}</h2>
+            <div className="container">
+                <div className="row justify-content-center m-2">
+                    <div className="col-md-6 col-lg-8">
+                        <div className="card mb-3">
+                            <UserStats {...state} />
 
-                    {state.isFollowed ? (
-                        <Link
-                            id="btnFollow"
-                            className="chirp-author"
-                            to={`/unfollow/${state.userId}`}
-                        >
-                            Unfollow
-                        </Link>
-                    ) : (
-                        <Link
-                            id="btnFollow"
-                            className="chirp-author"
-                            to={`/follow/${state.userId}`}
-                        >
-                            Follow
-                        </Link>
-                    )}
+                            <div className="card-body">
+                                {state.isFollowed ? (
+                                    <Link
+                                        id="btnFollow"
+                                        className="btn btn-primary"
+                                        to={`/unfollow/${state.userId}`}
+                                    >
+                                        Unfollow
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        id="btnFollow"
+                                        className="btn btn-primary"
+                                        to={`/follow/${state.userId}`}
+                                    >
+                                        Follow
+                                    </Link>
+                                )}
+                            </div>
+                        </div>
 
-                    <UserStats {...state} />
+                        <ChirpsList {...state} />
+                    </div>
                 </div>
-
-                <ChirpsList {...state} />
             </div>
         </div>
     );

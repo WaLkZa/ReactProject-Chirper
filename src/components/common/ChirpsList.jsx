@@ -4,8 +4,11 @@ import Chirp from './Chirp';
 const ChirpsList = (props) => {
     if (props.chirps.length) {
         return (
-            <div id="chirps" className="chirps">
-                <h2 className="titlebar">{props.title}</h2>
+            <div id="myChirps" className="card">
+                <div className="card-header">
+                    <h5 className="mb-0">{props.title}</h5>
+                </div>
+
                 {props.chirps.map(chirp => {
                     return <Chirp key={chirp.id} props={chirp} />
                 })}
@@ -13,8 +16,10 @@ const ChirpsList = (props) => {
         );
     } else {
         return (
-            <div id="chirps" className="chirps">
-                <h2 className="titlebar">{props.title}</h2>
+            <div id="chirps" className="card">
+                <div className="card-header">
+                    <h5 className="mb-0">{props.title}</h5>
+                </div>
                 No chirps in database.
             </div>
         );

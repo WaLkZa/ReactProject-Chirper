@@ -2,7 +2,9 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer><p>Chirper SPA © {new Date().getFullYear()}</p></footer>
+        <footer className="bg-secondary text-center text-white">
+            <p>Chirper SPA © {new Date().getFullYear()}</p>
+        </footer>
     )
 }
 

@@ -15,21 +15,21 @@ const HomePage = () => {
         following: 0,
         followers: 0,
         chirps: [],
-        title: 'Chirps from all followed users by you'
+        title: 'Feed'
     });
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const username = localStorage.getItem('username');
-                
+
                 const allChirps = await chirpsService.loadAllFollowedChirps();
 
                 const chirps = allChirps.chirps.map(chirp => {
                     return {
                         ...chirp,
                         user: {
-                            id: chirp.userId,  
+                            id: chirp.userId,
                             name: chirp.username
                         },
                         isAuthor: chirp.userId === localStorage.getItem('userId'),
@@ -63,8 +63,12 @@ const HomePage = () => {
     return (
         <div>
             <NavMenu />
-            <div className="content">
-                <ChirpsList {...state} />
+            <div className="container">
+                <div className="row justify-content-center m-2">
+                    <div className="col-md-6 col-lg-8">
+                        <ChirpsList {...state} />
+                    </div>
+                </div>
             </div>
         </div>
     );

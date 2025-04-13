@@ -67,13 +67,16 @@ const PersonalFeed = () => {
     return (
         <div>
             <NavMenu />
-            <div className="content">
-                <div className="chirper">
-                    <h2 className="titlebar">{state.username}</h2>
-                    <CreateChirpForm onChirpCreated={refreshChirps} />
-                    <UserStats {...state} />
+            <div className="container">
+                <div className="row justify-content-center m-2">
+                    <div className="col-md-6 col-lg-8">
+                        <div className="card mb-3">
+                            <UserStats {...state} />
+                            <CreateChirpForm onChirpCreated={refreshChirps} />
+                        </div>
+                        <ChirpsList {...state} />
+                    </div>
                 </div>
-                <ChirpsList {...state} />
             </div>
         </div>
     );

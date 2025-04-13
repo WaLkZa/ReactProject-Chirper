@@ -69,24 +69,48 @@ const EditChirp = () => {
     };
 
     return (
+        // <div>
+        //     <NavMenu />
+        //     <div className="content">
+        //         <div className="chirper">
+        //             <h2 className="titlebar">Author: {chirpData.author}</h2>
+
+        //             <form id="formSubmitChirp" className="chirp-form" onSubmit={onSubmitHandler}>
+        //                 <textarea
+        //                     name="text"
+        //                     className="chirp-input"
+        //                     value={chirpData.text}
+        //                     onChange={onChangeHandler}
+        //                 />
+        //                 <input
+        //                     className="chirp-submit"
+        //                     id="btnSubmitChirp"
+        //                     value="Edit"
+        //                     type="submit"
+        //                 />
+        //             </form>
+        //         </div>
+        //     </div>
+        // </div>
+
         <div>
             <NavMenu />
-            <div className="content">
-                <div className="chirper">
-                    <h2 className="titlebar">Author: {chirpData.author}</h2>
+            <div className="container">
+                <div className="card mb-3">
+                    <div className="card-header d-flex justify-content-between">
+                        <h5 className="mb-0">Author: {chirpData.author}</h5>
+                    </div>
 
-                    <form id="formSubmitChirp" className="chirp-form" onSubmit={onSubmitHandler}>
+                    <form onSubmit={onSubmitHandler}>
                         <textarea
                             name="text"
-                            className="chirp-input"
+                            className="form-control mb-2 chirp-input" rows="3"
                             value={chirpData.text}
                             onChange={onChangeHandler}
+                            maxLength={150}
                         />
                         <input
-                            className="chirp-submit"
-                            id="btnSubmitChirp"
-                            value="Edit"
-                            type="submit"
+                            id="btnSubmitChirpMy" value="Edit" type="submit" className="btn btn-primary float-end"
                         />
                     </form>
                 </div>
