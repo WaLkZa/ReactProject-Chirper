@@ -16,10 +16,11 @@ function loadAllChirps() {
     return requester.get('chirp/all', 'Basic');
 }
 
-function createChirp(userId, content) {
+function createChirp(userId, content, image) {
     let chirpData = {
         userId,
-        content
+        content,
+        image
     }
 
     return requester.post('chirp/create', 'Bearer', chirpData)
@@ -29,9 +30,10 @@ function deleteChirp(chirpId) {
     return requester.remove(`chirp/delete/${chirpId}`, 'Bearer')
 }
 
-function editChirp(chirpId, content) {
+function editChirp(chirpId, content, image) {
     let newData = {
-        content
+        content,
+        image
     }
 
     return requester.update(`chirp/edit/${chirpId}`, 'Bearer', newData)

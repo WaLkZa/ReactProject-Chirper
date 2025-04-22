@@ -8,7 +8,7 @@ const UserBox = ({ name, id, chirps }) => {
             <Link to={`/feed/${id}`} className="chirp-author">{name}</Link>
 
             {authService.isAdmin() && (
-                <Link to={`/deleteUser/${id}`}><i class="bi bi-trash3-fill"></i></Link>
+                <Link to={`/deleteUser/${id}`}><i className="bi bi-trash3-fill"></i></Link>
             )}
             <span className="text-muted small">{chirps.length} chirps</span>
         </div>

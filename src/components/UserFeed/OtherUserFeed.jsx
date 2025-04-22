@@ -22,16 +22,6 @@ const OtherUserFeed = () => {
     });
 
     useEffect(() => {
-        // usersService.loadUserById(id)
-        //     .then(user => {
-        //         console.log(user)
-        //         setState(prevState => ({
-        //             ...prevState,
-        //             isFollowed: false,
-
-        //         }))
-        //     })
-
         Promise.all([
             usersService.loadUserById(id),
             usersService.loadUserStats(id),
@@ -66,7 +56,7 @@ const OtherUserFeed = () => {
                     position: 'top-right'
                 });
             });
-    }, [id]); // Run when id changes
+    }, [id]); 
 
     return (
         <div>

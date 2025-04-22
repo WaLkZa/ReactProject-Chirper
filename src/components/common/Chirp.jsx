@@ -5,7 +5,7 @@ import authService from "../utils/services/authService";
 
 
 // po stariq nachin taka se dostupva vnimawai !!! props.props.user.id
-const Chirp = ({ props: { user, id, isAuthor, dateCreated, content } }) => {
+const Chirp = ({ props: { user, id, isAuthor, dateCreated, content, image } }) => {
     const canModify = isAuthor || authService.isAdmin();
 
     return (
@@ -16,9 +16,9 @@ const Chirp = ({ props: { user, id, isAuthor, dateCreated, content } }) => {
                     <span className="chirp-time">
                         {canModify && (
                             <>
-                                <Link to={`/editChirp/${id}`}><i class="bi bi-pencil-fill"></i></Link>
+                                <Link to={`/editChirp/${id}`}><i className="bi bi-pencil-fill"></i></Link>
                                 {' '}
-                                <Link to={`/deleteChirp/${id}`}><i class="bi bi-trash3-fill"></i></Link>
+                                <Link to={`/deleteChirp/${id}`}><i className="bi bi-trash3-fill"></i></Link>
                                 {' '}
                             </>
                         )}
@@ -26,6 +26,14 @@ const Chirp = ({ props: { user, id, isAuthor, dateCreated, content } }) => {
                     </span>
                 </div>
                 <p className="mb-0">{content}</p>
+
+                {image && (
+                    <img
+                        src={`${image}`}
+                        alt="chirp"
+                        style={{ maxWidth: '40%', borderRadius: '0.5rem' }}
+                    />
+                )}
             </article>
         </div>
     );
